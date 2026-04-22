@@ -1,0 +1,19 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "${LOG_MAX_SIZE:-10m}"
+    max-file: "${LOG_MAX_FILE:-3}"
+    compress: "${LOG_COMPRESS:-true}"
+services:
+  filestash:
+    image: ${IMAGE:-machines/filestash:latest}
+    container_name: filestash
+    restart: unless-stopped
+    logging: *default-logging
+    volumes:
+      - filestash-data:/app/data/state/
+    ports:
+      - 8334:8334
+volumes:
+  filestash-data:
+    name: filestash-data

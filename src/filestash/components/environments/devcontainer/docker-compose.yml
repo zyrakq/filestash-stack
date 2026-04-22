@@ -1,0 +1,8 @@
+services:
+  filestash:
+    networks:
+      - filestash-workspace-network
+
+networks:
+  filestash-workspace-network:
+    external: true
